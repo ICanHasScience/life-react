@@ -63,6 +63,10 @@ class App extends Component {
     this.setState({ctx: ctx});
   }
 
+  iterateBips = () => {
+    this.setState({bips: bipUtils.repopulateBips(this.state.bips)});
+  }
+
   renderBips = () => {
     let myBips = [];
     this.state.bips.forEach((bipCol) => {
@@ -84,13 +88,13 @@ class App extends Component {
   }
 
   render() {
-    console.log('context:', this.state.ctx);
     return (
       <Main>
         <Header>
           <Logo src={logo} alt="logo" />
           <Title >Welcome to React</Title>
         </Header>
+        <button onClick={this.iterateBips}>Iterate Bips</button>
         <Board
           setContext={this.setContext}
           xSize={this.state.xSize}
