@@ -4,6 +4,7 @@ import './App.css';
 import styled from 'styled-components';
 import Board from './components/board.jsx';
 import Bip from './components/bip.jsx';
+import * as bipUtils from './js/bipUtils.js'
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -54,11 +55,32 @@ class App extends Component {
     ySize: 40,
     scale: 10,
     offColor: 'darkGrey',
-    onColor: 'red'
+    onColor: 'red',
+    bips: bipUtils.initializeRandomBips(80, 40)
   };
 
   setContext = (ctx) => {
     this.setState({ctx: ctx});
+  }
+
+  renderBips = () => {
+    let myBips = [];
+    this.state.bips.forEach((bipCol) => {
+      bipCol.forEach((bip) => {
+        myBips.push(
+          <Bip
+            x= {bip.x}
+            y= {bip.y}
+            s= {this.state.scale}
+            v= {bip.alive}
+            onColor= {this.state.onColor}
+            offColor= {this.state.offColor}
+            ctx= {this.state.ctx}
+          />
+        );
+      });
+    });
+    return myBips;
   }
 
   render() {
@@ -75,38 +97,7 @@ class App extends Component {
           ySize={this.state.ySize}
           scale={this.state.scale}
         />
-        <Bip
-          x= {10}
-          y= {10}
-          s= {this.state.scale}
-          v= {true}
-          onColor= {this.state.onColor}
-          offColor= {this.state.offColor}
-          ctx= {this.state.ctx} />
-        <Bip
-          x= {11}
-          y= {10}
-          s= {this.state.scale}
-          v= {false}
-          onColor= {this.state.onColor}
-          offColor= {this.state.offColor}
-          ctx= {this.state.ctx} />
-        <Bip
-          x= {10}
-          y= {11}
-          s= {this.state.scale}
-          v= {true}
-          onColor= {this.state.onColor}
-          offColor= {this.state.offColor}
-          ctx= {this.state.ctx} />
-        <Bip
-          x= {11}
-          y= {11}
-          s= {this.state.scale}
-          v= {false}
-          onColor= {this.state.onColor}
-          offColor= {this.state.offColor}
-          ctx= {this.state.ctx} />
+        {this.renderBips()}
       </Main>
     );
   }
