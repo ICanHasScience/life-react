@@ -22,7 +22,7 @@ const drawBip = (ctx, options) => {
 
 	 ctx.translate(x * s, y * s);
 	 ctx.beginPath();
-	 ctx.rect(0, 0, s, s);
+	 ctx.rect(1, 1, s-1, s-1);
 
 	 ctx.fill();
 

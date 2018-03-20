@@ -48,7 +48,14 @@ class App extends Component {
   //   this.state.bips.map((bip) => <Bip x={bip.x} y={bip.y} ctx=/>);
   // }
 
-  state={ctx: null};
+  state={
+    ctx: null,
+    xSize: 80,
+    ySize: 40,
+    scale: 10,
+    offColor: 'darkGrey',
+    onColor: 'red'
+  };
 
   setContext = (ctx) => {
     this.setState({ctx: ctx});
@@ -62,14 +69,43 @@ class App extends Component {
           <Logo src={logo} alt="logo" />
           <Title >Welcome to React</Title>
         </Header>
-        <Board setContext={this.setContext} />
+        <Board
+          setContext={this.setContext}
+          xSize={this.state.xSize}
+          ySize={this.state.ySize}
+          scale={this.state.scale}
+        />
         <Bip
           x= {10}
           y= {10}
-          s= {10}
+          s= {this.state.scale}
           v= {true}
-          onColor= 'green'
-          offColor= 'darkgrey'
+          onColor= {this.state.onColor}
+          offColor= {this.state.offColor}
+          ctx= {this.state.ctx} />
+        <Bip
+          x= {11}
+          y= {10}
+          s= {this.state.scale}
+          v= {false}
+          onColor= {this.state.onColor}
+          offColor= {this.state.offColor}
+          ctx= {this.state.ctx} />
+        <Bip
+          x= {10}
+          y= {11}
+          s= {this.state.scale}
+          v= {true}
+          onColor= {this.state.onColor}
+          offColor= {this.state.offColor}
+          ctx= {this.state.ctx} />
+        <Bip
+          x= {11}
+          y= {11}
+          s= {this.state.scale}
+          v= {false}
+          onColor= {this.state.onColor}
+          offColor= {this.state.offColor}
           ctx= {this.state.ctx} />
       </Main>
     );
